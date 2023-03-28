@@ -1,9 +1,9 @@
 function iniciarJuego (){
     let botonMascota = document.getElementById('boton-mascota')
-    botonMascota.addEventListener('click', seleccionarMascota)
+    botonMascota.addEventListener('click', seleccionarMascotaJugador)
 }
 
-function seleccionarMascota(){
+function seleccionarMascotaJugador(){
     let inputHipodoge = document.getElementById('hipodoge')
     let inputCapipepo = document.getElementById('capipepo')
     let inputRatigueya = document.getElementById('ratigueya')
@@ -11,7 +11,7 @@ function seleccionarMascota(){
     let inputTucapalma = document.getElementById('tucapalma')
     let inputPydos = document.getElementById('pydos')
 
-    let spanMascotaJugador = document.getElementById('mascota-select-jugador')
+    let spanMascotaJugador = document.getElementById('mascota-jugador')
 
 
 
@@ -36,14 +36,38 @@ function seleccionarMascota(){
     } else {
         alert("Selecciona una mascota")
     }
+
+    seleccionarMascotaEnemigo()
 }
 
 function seleccionarMascotaEnemigo(){
+    let mascotaAleatorio = aleatorio(1,6)
+    let spanMascotaEnemigo = document.getElementById("mascota-enemigo")
+
+
+    if (mascotaAleatorio == 1) {
+        spanMascotaEnemigo.innerHTML = "Hipodoge"
+    } else if (mascotaAleatorio == 2){
+        spanMascotaEnemigo.innerHTML = "Capipepo"
+
+    } else if (mascotaAleatorio == 3){
+        spanMascotaEnemigo.innerHTML = "Ratigueya"
+
+    } else if (mascotaAleatorio == 4){
+        spanMascotaEnemigo.innerHTML = "Langostelvis"
+
+    } else if (mascotaAleatorio == 5){
+        spanMascotaEnemigo.innerHTML = "Tucapalma"
+
+    } else {
+        spanMascotaEnemigo.innerHTML = "Pydos"
+
+    }
 
 }
 
 function aleatorio(min, max){
-    Math.floor(Math.random()* (max - min + 1) + min)
+    return Math.floor(Math.random()* (max - min + 1) + min)
 }
 
 
