@@ -1,4 +1,5 @@
 let ataqueJugador
+let ataqueEnemigo
 
 
 function iniciarJuego (){
@@ -77,16 +78,19 @@ function aleatorio(min, max){
 
 function ataqueFuego(){
     ataqueJugador = "FUEGO"
+    seleccionarAtaqueEnemigo()
     alert(ataqueJugador)
 }
 
 function ataqueAgua(){
     ataqueJugador = "AGUA"
+    seleccionarAtaqueEnemigo()
     alert(ataqueJugador)
 }
 
 function ataqueTierra(){
     ataqueJugador = "TIERRA"
+    seleccionarAtaqueEnemigo()
     alert(ataqueJugador)
 
 }
@@ -103,6 +107,17 @@ function seleccionarAtaqueJugador(){
     botonTierra.addEventListener('click', ataqueTierra)
 }
 
+function seleccionarAtaqueEnemigo(){
+    let ataqueAleatorio = aleatorio(1,3)
+
+    if (ataqueAleatorio == 1) {
+        ataqueEnemigo = "FUEGO"
+    } else if (ataqueAleatorio == 2){
+        ataqueEnemigo = "AGUA"
+    } else {
+        ataqueEnemigo = "TIERRA"
+    }
+}
+
 // Main
 window.addEventListener('load', iniciarJuego)
-
