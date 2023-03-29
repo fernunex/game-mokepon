@@ -2,10 +2,13 @@ let ataqueJugador
 let ataqueEnemigo
 
 
+// Iniciar el juego
 function iniciarJuego (){
     let botonMascota = document.getElementById('boton-mascota')
     botonMascota.addEventListener('click', seleccionarMascotaJugador)
 }
+
+// Seleccionar mascotas
 
 function seleccionarMascotaJugador(){
     let inputHipodoge = document.getElementById('hipodoge')
@@ -72,27 +75,21 @@ function seleccionarMascotaEnemigo(){
     seleccionarAtaqueJugador()
 }
 
-function aleatorio(min, max){
-    return Math.floor(Math.random()* (max - min + 1) + min)
-}
+// Seleccionar ataques
 
 function ataqueFuego(){
     ataqueJugador = "FUEGO"
     seleccionarAtaqueEnemigo()
-    alert(ataqueJugador)
 }
 
 function ataqueAgua(){
     ataqueJugador = "AGUA"
     seleccionarAtaqueEnemigo()
-    alert(ataqueJugador)
 }
 
 function ataqueTierra(){
     ataqueJugador = "TIERRA"
     seleccionarAtaqueEnemigo()
-    alert(ataqueJugador)
-
 }
 
 function seleccionarAtaqueJugador(){
@@ -117,7 +114,27 @@ function seleccionarAtaqueEnemigo(){
     } else {
         ataqueEnemigo = "TIERRA"
     }
+
+    createMensaje()
 }
+
+// Crear mensajes
+
+function createMensaje(){
+    let sectionMensajes = document.getElementById("mensaje")
+    let parrafo = document.createElement('p')
+
+    parrafo.innerHTML = "Tú mascota atacó con " + ataqueJugador + ", la mascota del enemigo atacó con " + ataqueEnemigo + " - EN PROCESO 🎉"
+
+    sectionMensajes.appendChild(parrafo)
+}
+
+// Otras funciones
+
+function aleatorio(min, max){
+    return Math.floor(Math.random()* (max - min + 1) + min)
+}
+
 
 // Main
 window.addEventListener('load', iniciarJuego)
