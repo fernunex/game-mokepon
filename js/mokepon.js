@@ -114,19 +114,35 @@ function seleccionarAtaqueEnemigo(){
     } else {
         ataqueEnemigo = "TIERRA"
     }
-
-    createMensaje()
+    combate()
 }
 
 // Crear mensajes
 
-function createMensaje(){
+function createMensaje(resultadoCombate){
     let sectionMensajes = document.getElementById("mensaje")
     let parrafo = document.createElement('p')
 
-    parrafo.innerHTML = "Tú mascota atacó con " + ataqueJugador + ", la mascota del enemigo atacó con " + ataqueEnemigo + " - EN PROCESO 🎉"
+    parrafo.innerHTML = "Tú mascota atacó con " + ataqueJugador + ", la mascota del enemigo atacó con " + ataqueEnemigo + " ---> " + resultadoCombate
 
     sectionMensajes.appendChild(parrafo)
+}
+
+// Validar quien gana
+
+function combate(){
+
+    if (ataqueEnemigo == ataqueJugador){
+        createMensaje('EMPATE')
+    } else if (ataqueJugador == 'AGUA' & ataqueEnemigo == 'FUEGO'){
+        createMensaje('GANASTE')
+    } else if (ataqueJugador == 'TIERRA' & ataqueEnemigo == 'AGUA'){
+        createMensaje('GANASTE')
+    } else if (ataqueJugador == 'FUEGO' & ataqueEnemigo == 'TIERRA'){
+        createMensaje('GANASTE')
+    } else {
+        createMensaje('PERDISTE')
+    }
 }
 
 // Otras funciones
