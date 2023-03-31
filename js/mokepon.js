@@ -136,6 +136,7 @@ function combate(){
     let spanVidasJugador = document.getElementById('vidas-jugador')
     let spanVidasEnemigo = document.getElementById('vidas-enemigo')
 
+
     if (ataqueEnemigo == ataqueJugador){
         createMensaje('EMPATE')
     } else if (ataqueJugador == 'AGUA' & ataqueEnemigo == 'FUEGO'){
@@ -144,15 +145,45 @@ function combate(){
         spanVidasEnemigo.innerHTML = vidasEnemigo
     } else if (ataqueJugador == 'TIERRA' & ataqueEnemigo == 'AGUA'){
         createMensaje('GANASTE')
+        vidasEnemigo--
         spanVidasEnemigo.innerHTML = vidasEnemigo
     } else if (ataqueJugador == 'FUEGO' & ataqueEnemigo == 'TIERRA'){
         createMensaje('GANASTE')
+        vidasEnemigo--
         spanVidasEnemigo.innerHTML = vidasEnemigo
     } else {
         createMensaje('PERDISTE')
         vidasJugador--
         spanVidasJugador.innerHTML = vidasJugador
     }
+    
+    // Revisar las vidas
+    revisarVidas()
+}
+
+// Final del juego y validar vidas
+
+function revisarVidas(){
+    let spanMascotaJugador = document.getElementById('mascota-jugador')
+    let spanMascotaEnemigo = document.getElementById('mascota-enemigo')
+
+
+    if (vidasJugador == 0){
+        mensajeFinal("EL ENEMIGO ganó", spanMascotaEnemigo.innerHTML)
+    } else if (vidasEnemigo == 0) {
+        mensajeFinal("TU Ganaste", spanMascotaJugador.innerHTML)
+    } else {
+        
+    }
+}
+
+function mensajeFinal(jugadorGanador, mascotaGanadora){
+    let sectionMensajes = document.getElementById("mensaje")
+    let parrafoFinal = document.createElement('p')
+
+    parrafoFinal.innerHTML = jugadorGanador + " con su mascota "+ mascotaGanadora
+
+    sectionMensajes.appendChild(parrafoFinal)
 }
 
 // Otras funciones
