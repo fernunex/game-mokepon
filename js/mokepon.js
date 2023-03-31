@@ -1,5 +1,7 @@
 let ataqueJugador
 let ataqueEnemigo
+let vidasJugador = 3
+let vidasEnemigo = 3
 
 
 // Iniciar el juego
@@ -128,20 +130,28 @@ function createMensaje(resultadoCombate){
     sectionMensajes.appendChild(parrafo)
 }
 
-// Validar quien gana
+// Combates
 
 function combate(){
+    let spanVidasJugador = document.getElementById('vidas-jugador')
+    let spanVidasEnemigo = document.getElementById('vidas-enemigo')
 
     if (ataqueEnemigo == ataqueJugador){
         createMensaje('EMPATE')
     } else if (ataqueJugador == 'AGUA' & ataqueEnemigo == 'FUEGO'){
         createMensaje('GANASTE')
+        vidasEnemigo--
+        spanVidasEnemigo.innerHTML = vidasEnemigo
     } else if (ataqueJugador == 'TIERRA' & ataqueEnemigo == 'AGUA'){
         createMensaje('GANASTE')
+        spanVidasEnemigo.innerHTML = vidasEnemigo
     } else if (ataqueJugador == 'FUEGO' & ataqueEnemigo == 'TIERRA'){
         createMensaje('GANASTE')
+        spanVidasEnemigo.innerHTML = vidasEnemigo
     } else {
         createMensaje('PERDISTE')
+        vidasJugador--
+        spanVidasJugador.innerHTML = vidasJugador
     }
 }
 
