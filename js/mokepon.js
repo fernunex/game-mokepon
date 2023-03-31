@@ -6,6 +6,15 @@ let vidasEnemigo = 3
 
 // Iniciar el juego
 function iniciarJuego (){
+
+    // Ocultar secciones
+    let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque")
+    sectionSeleccionarAtaque.style.display = 'none'
+
+    let sectionReiniciar = document.getElementById("reiniciar")
+    sectionReiniciar.style.display = 'none'
+
+
     let botonMascota = document.getElementById('boton-mascota')
     botonMascota.addEventListener('click', seleccionarMascotaJugador)
 
@@ -16,6 +25,12 @@ function iniciarJuego (){
 // Seleccionar mascotas
 
 function seleccionarMascotaJugador(){
+    let sectionSeleccionarMascota = document.getElementById("seleccionar-mascota")
+    sectionSeleccionarMascota.style.display = 'none'
+
+    let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque")
+    sectionSeleccionarAtaque.style.display = 'block'
+
     let inputHipodoge = document.getElementById('hipodoge')
     let inputCapipepo = document.getElementById('capipepo')
     let inputRatigueya = document.getElementById('ratigueya')
@@ -48,7 +63,7 @@ function seleccionarMascotaJugador(){
     } else {
         alert("Selecciona una mascota")
     }
-    
+
     seleccionarMascotaEnemigo()
 }
 
@@ -183,6 +198,10 @@ function revisarVidas(){
 }
 
 function deshabilitarBotones(){
+    // Mostrar boton reiniciar
+    let sectionReiniciar = document.getElementById("reiniciar")
+    sectionReiniciar.style.display = 'block'
+
     let botonFuego = document.getElementById("boton-fuego")
     botonFuego.disabled = true
 
