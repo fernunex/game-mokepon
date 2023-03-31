@@ -8,6 +8,9 @@ let vidasEnemigo = 3
 function iniciarJuego (){
     let botonMascota = document.getElementById('boton-mascota')
     botonMascota.addEventListener('click', seleccionarMascotaJugador)
+
+    let botonReiniciar = document.getElementById("boton-reiniciar")
+    botonReiniciar.addEventListener('click', reiniciarJuego)
 }
 
 // Seleccionar mascotas
@@ -45,7 +48,7 @@ function seleccionarMascotaJugador(){
     } else {
         alert("Selecciona una mascota")
     }
-
+    
     seleccionarMascotaEnemigo()
 }
 
@@ -170,11 +173,24 @@ function revisarVidas(){
 
     if (vidasJugador == 0){
         mensajeFinal("EL ENEMIGO ganó", spanMascotaEnemigo.innerHTML)
+        deshabilitarBotones()
     } else if (vidasEnemigo == 0) {
         mensajeFinal("TU Ganaste", spanMascotaJugador.innerHTML)
+        deshabilitarBotones()
     } else {
         
     }
+}
+
+function deshabilitarBotones(){
+    let botonFuego = document.getElementById("boton-fuego")
+    botonFuego.disabled = true
+
+    let botonAgua = document.getElementById("boton-agua")
+    botonAgua.disabled = true
+
+    let botonTierra = document.getElementById("boton-tierra")
+    botonTierra.disabled = true
 }
 
 function mensajeFinal(jugadorGanador, mascotaGanadora){
@@ -192,6 +208,11 @@ function aleatorio(min, max){
     return Math.floor(Math.random()* (max - min + 1) + min)
 }
 
+// Reiniciar Juego
+
+function reiniciarJuego(){
+    location.reload()
+}
 
 // Main
 window.addEventListener('load', iniciarJuego)
