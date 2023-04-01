@@ -1,0 +1,14 @@
+.titulo {
+    color: lawngreen;
+    background-color: darkkhaki;
+    width: 220px;
+    height: 50px;
+}
+
+/* Seccion de seleccionar mascota */
+#seleccionar-mascota {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
