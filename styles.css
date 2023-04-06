@@ -105,3 +105,39 @@ input {
     font-family: 'Play', sans-serif;
     font-size: 18px;
 }
+
+#mensaje {
+    background: #1F8A70;
+    margin: 20px;
+    width: 400px;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-family: 'Play', sans-serif;
+    color: white;
+
+}
+
+#boton-reiniciar {
+    width: 150px;
+    height: 50px;
+    border: none;
+    color: white;
+    background-color: #FC7300;
+    border-radius: 15px;
+
+    font-family: 'Play', sans-serif;
+    font-size: 18px;
+}
+
+/* Colors
+00425A
+1F8A70
+BFDB38
+FC7300 
+*/
