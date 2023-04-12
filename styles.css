@@ -45,6 +45,11 @@ body {
     display: none;
 }
 
+.labels-mokepons input:checked + label {
+    background-color: #f7c04ad2;
+    color: black;
+}
+
 .label-mokepon {
     width: 175px;
     height: 100px;
@@ -86,9 +91,18 @@ input {
     font-size: 25px;
 }
 
+#boton-mascota:hover {
+    background-color: #fc2600;
+}
+
 #seleccionar-ataque {
     flex-direction: column;
     align-items: center;
+}
+
+.botones-de-ataque {
+    display: flex;
+    gap: 15px;
 }
 
 .boton-de-ataque {
@@ -104,3 +118,80 @@ input {
     font-family: 'Play', sans-serif;
     font-size: 18px;
 }
+
+.boton-de-ataque:hover {
+    background-color: wheat;
+}
+
+#mensaje {
+    background: #1F8A70;
+    margin: 20px;
+    width: 400px;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-family: 'Play', sans-serif;
+    color: white;
+
+}
+
+#boton-reiniciar {
+    width: 150px;
+    height: 50px;
+    border: none;
+    color: white;
+    background-color: #FC7300;
+    border-radius: 15px;
+
+    font-family: 'Play', sans-serif;
+    font-size: 18px;
+}
+
+#boton-reiniciar:hover {
+    background-color: #fc2600;
+}
+
+.ataques {
+    display: grid;
+    grid-template-columns: 100px 100px;
+    margin: 20px;
+    gap: 100px;
+}
+
+#vidas-jugador, #vidas-enemigo {
+    font-size: 32px;
+    margin-bottom: 0;
+    color: white;
+    
+}
+
+#mascota-jugador, #mascota-enemigo {
+    font-size: 26px;
+}
+
+.ataques-jugador, .ataques-enemigo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+}
+
+
+@media (max-width: 360px) {
+    .labels-mokepons div, .botones-de-ataque{
+        flex-direction: column;
+    }
+}
+
+/* Colors
+00425A
+1F8A70
+BFDB38
+FC7300 
+*/

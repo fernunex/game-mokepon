@@ -140,12 +140,23 @@ function seleccionarAtaqueEnemigo(){
 // Crear mensajes
 
 function createMensaje(resultadoCombate){
-    let sectionMensajes = document.getElementById("mensaje")
-    let parrafo = document.createElement('p')
+    let pResultado = document.getElementById("resultado")
+    let divAtaqueDelJugador = document.getElementById("ataques-del-jugador")
+    let divAtaqueDelEnemigo = document.getElementById("ataques-del-enemigo")
 
-    parrafo.innerHTML = "Tú mascota atacó con " + ataqueJugador + ", la mascota del enemigo atacó con " + ataqueEnemigo + " ---> " + resultadoCombate
+    // Crear los parrafos para las notificaciones
+    let nuevoAtaqueDelJugador = document.createElement('p')
+    let nuevoAtaqueDelEnemigo = document.createElement('p')
 
-    sectionMensajes.appendChild(parrafo)
+    // Rellenar los parrafos
+    pResultado.innerHTML = resultadoCombate
+    nuevoAtaqueDelJugador.innerHTML = ataqueJugador
+    nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo
+
+    // Agregar a los hijos
+    divAtaqueDelJugador.appendChild(nuevoAtaqueDelJugador)
+    divAtaqueDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
+    
 }
 
 // Combates
@@ -187,10 +198,10 @@ function revisarVidas(){
 
 
     if (vidasJugador == 0){
-        mensajeFinal("EL ENEMIGO ganó", spanMascotaEnemigo.innerHTML)
+        mensajeFinal("EL ENEMIGO ganó :(", spanMascotaEnemigo.innerHTML)
         deshabilitarBotones()
     } else if (vidasEnemigo == 0) {
-        mensajeFinal("TU Ganaste", spanMascotaJugador.innerHTML)
+        mensajeFinal("TU Ganaste :D", spanMascotaJugador.innerHTML)
         deshabilitarBotones()
     } else {
         
@@ -200,7 +211,7 @@ function revisarVidas(){
 function deshabilitarBotones(){
     // Mostrar boton reiniciar
     let sectionReiniciar = document.getElementById("reiniciar")
-    sectionReiniciar.style.display = 'block'
+    sectionReiniciar.style.display = 'flex'
 
     let botonFuego = document.getElementById("boton-fuego")
     botonFuego.disabled = true
@@ -213,12 +224,9 @@ function deshabilitarBotones(){
 }
 
 function mensajeFinal(jugadorGanador, mascotaGanadora){
-    let sectionMensajes = document.getElementById("mensaje")
-    let parrafoFinal = document.createElement('p')
+    let sectionMensajes = document.getElementById("resultado")
 
-    parrafoFinal.innerHTML = jugadorGanador + " con su mascota "+ mascotaGanadora
-
-    sectionMensajes.appendChild(parrafoFinal)
+    sectionMensajes.innerHTML = jugadorGanador + " con la mascota: "+ mascotaGanadora
 }
 
 // Otras funciones
