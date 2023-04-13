@@ -40,6 +40,51 @@ let vidasEnemigo = 3
 // Seccion de crear mensaje final
 const sectionMensajes = document.getElementById("resultado")
 
+// Arreglos
+let mokepones = []
+
+// Classes
+
+class Mokepon {
+    constructor (nombre, imagen, vida){
+        this.nombre = nombre
+        this.imagen = imagen
+        this.vida = vida
+        this.ataques = []
+
+    }
+}
+
+let hipodoge = new Mokepon('Hipodoge', 'assets/mokepons_mokepon_hipodoge_attack.png', 100)
+let capipepo = new Mokepon('Capipepo', 'assets/mokepons_mokepon_capipepo_attack.png', 100)
+let ratigueya = new Mokepon('Ratigueya', 'assets/mokepons_mokepon_ratigueya_attack.png', 100)
+
+// Llenando los ataques de los mokepones
+
+hipodoge.ataques.push(
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🌰', id: 'boton-tierra'}
+
+)
+
+capipepo.ataques.push(
+    {nombre: '🌰', id: 'boton-tierra'},
+    {nombre: '🌰', id: 'boton-tierra'},
+    {nombre: '🌰', id: 'boton-tierra'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🔥', id: 'boton-fuego'}
+)
+
+ratigueya.ataques.push(
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🌰', id: 'boton-tierra'}
+)
 
 
 // Iniciar el juego
