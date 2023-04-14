@@ -34,11 +34,7 @@ body {
 .labels-mokepons {
     display: flex;
     gap: 10px;
-    flex-direction: column;
-}
-
-.labels-mokepons div {
-    display: flex;
+    flex-direction: row;
 }
 
 .labels-mokepons input {

@@ -14,6 +14,9 @@ const inputHipodoge = document.getElementById('hipodoge')
 const inputCapipepo = document.getElementById('capipepo')
 const inputRatigueya = document.getElementById('ratigueya')
 
+let opcionDeMokepon
+const divContenedorTarjetas = document.getElementById('contenedor-tarjetas')
+
 // Mascota enemigo
 const spanMascotaEnemigo = document.getElementById("mascota-enemigo")
 
@@ -86,9 +89,25 @@ ratigueya.ataques.push(
     {nombre: '🌰', id: 'boton-tierra'}
 )
 
+// llenandoo los mokepones
+mokepones.push(hipodoge, capipepo, ratigueya)
 
 // Iniciar el juego
 function iniciarJuego (){
+
+    // Iterar mokepones
+    mokepones.forEach( (mokepon) =>
+    {
+        opcionDeMokepon = `
+        <input type="radio" name="mascota" id=${mokepon.nombre}>
+        <label for="${mokepon.nombre}" class="label-mokepon">
+            <p>${mokepon.nombre}</p>
+            <img src=${mokepon.imagen} alt=${mokepon.nombre}>
+        </label>
+        `
+        divContenedorTarjetas.innerHTML += opcionDeMokepon
+    }
+    )
 
     // Ocultar secciones
     sectionSeleccionarAtaque.style.display = 'none'
