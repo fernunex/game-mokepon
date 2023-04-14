@@ -10,9 +10,6 @@ const spanMascotaJugador = document.getElementById('mascota-jugador')
 
 // Inputs de la seccion de seleccionar mascota
 const sectionSeleccionarMascota = document.getElementById("seleccionar-mascota")
-const inputHipodoge = document.getElementById('hipodoge')
-const inputCapipepo = document.getElementById('capipepo')
-const inputRatigueya = document.getElementById('ratigueya')
 
 let opcionDeMokepon
 const divContenedorTarjetas = document.getElementById('contenedor-tarjetas')
@@ -35,10 +32,17 @@ const divAtaqueDelEnemigo = document.getElementById("ataques-del-enemigo")
 const spanVidasJugador = document.getElementById('vidas-jugador')
 const spanVidasEnemigo = document.getElementById('vidas-enemigo')
 
+// -----------------------
 let ataqueJugador
 let ataqueEnemigo
 let vidasJugador = 3
 let vidasEnemigo = 3
+
+// Mokepones html
+let inputHipodoge
+let inputCapipepo
+let inputRatigueya
+
 
 // Seccion de crear mensaje final
 const sectionMensajes = document.getElementById("resultado")
@@ -106,6 +110,10 @@ function iniciarJuego (){
         </label>
         `
         divContenedorTarjetas.innerHTML += opcionDeMokepon
+
+        inputHipodoge = document.getElementById('Hipodoge')
+        inputCapipepo = document.getElementById('Capipepo')
+        inputRatigueya = document.getElementById('Ratigueya')
     }
     )
 
@@ -124,22 +132,13 @@ function seleccionarMascotaJugador(){
 
 
     if (inputHipodoge.checked) {
-        spanMascotaJugador.innerHTML = "Hipodoge"
+        spanMascotaJugador.innerHTML = inputHipodoge.id
 
     } else if (inputCapipepo.checked) {
-        spanMascotaJugador.innerHTML = "Capipepo"
+        spanMascotaJugador.innerHTML = inputCapipepo.id
 
     } else if (inputRatigueya.checked) {
-        spanMascotaJugador.innerHTML = "Ratigueya"
-
-    } else if (inputLangostelvis.checked) {
-        spanMascotaJugador.innerHTML = "Langostelvis"
-
-    } else if (inputTucapalma.checked) {
-        spanMascotaJugador.innerHTML = "Tucapalma"
-
-    } else if (inputPydos.checked) {
-        spanMascotaJugador.innerHTML = "Pydos"
+        spanMascotaJugador.innerHTML = inputRatigueya.id
 
     } else {
         alert("Selecciona una mascota")
