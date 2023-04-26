@@ -31,6 +31,7 @@ const spanVidasEnemigo = document.getElementById('vidas-enemigo')
 // -----------------------
 let ataquesJugador = []
 let ataquesEnemigo = []
+let ataquesDisponibleEnemigo = []
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -150,8 +151,8 @@ function seleccionarMascotaJugador(){
         alert("Selecciona una mascota")
     }
 
-    extraerAtaques(mascotaJugador)
     seleccionarMascotaEnemigo()
+    extraerAtaques(mascotaJugador)
 }
 
 function extraerAtaques(mascotaJugador){
@@ -169,6 +170,7 @@ function seleccionarMascotaEnemigo(){
     let mascotaAleatorio = aleatorio(0, mokepones.length - 1)
 
     spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatorio].nombre
+    ataquesDisponibleEnemigo = mokepones[mascotaAleatorio].ataques
 }
 
 function mostrarAtaques(ataques){
@@ -188,6 +190,7 @@ function mostrarAtaques(ataques){
     botones = document.querySelectorAll('.b-ataque')
 
     secuenciaAtaques()
+    seleccionarAtaqueEnemigo()
 }
 
 // Agregare los addEventListener a los botones
@@ -214,16 +217,32 @@ function secuenciaAtaques(){
 
 
 function seleccionarAtaqueEnemigo(){
-    let ataqueAleatorio = aleatorio(1,3)
-
-    if (ataqueAleatorio == 1) {
-        ataqueEnemigo = "FUEGO"
-    } else if (ataqueAleatorio == 2){
-        ataqueEnemigo = "AGUA"
+    // Extracting the names
+    ataquesDisponibleEnemigo.forEach((ataque) => {
+    if (ataque.nombre == '🔥') {
+        ataquesEnemigo.push('FUEGO')
+    } else if (ataque.nombre == '💧') {
+        ataquesEnemigo.push('AGUA')
     } else {
-        ataqueEnemigo = "TIERRA"
+        ataquesEnemigo.push('TIERRA')
     }
-    combate()
+})
+
+    // Original array
+    console.log(ataquesEnemigo)
+    // Shuffle array
+    shuffleArray(ataquesEnemigo)
+    console.log(ataquesEnemigo)
+}
+
+// Shuffle the array
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
 }
 
 // Crear mensajes
