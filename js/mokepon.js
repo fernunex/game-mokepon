@@ -35,6 +35,9 @@ let ataquesDisponibleEnemigo = []
 let vidasJugador = 3
 let vidasEnemigo = 3
 
+let ataqueEnemigo
+let ataqueJugador
+
 // Mokepones html
 let inputHipodoge
 let inputCapipepo
@@ -211,6 +214,7 @@ function secuenciaAtaques(){
                 console.log(ataquesJugador)
                 boton.style.background = '#112f58'
             }
+            iniciarPelea()
         })
     })
 }
@@ -245,6 +249,14 @@ function shuffleArray(array) {
     }
 }
 
+// Iniciar pelea
+
+function iniciarPelea(){
+    if (ataquesJugador.length == 5){
+        combate()
+    }
+}
+
 // Crear mensajes
 
 function createMensaje(resultadoCombate){
@@ -267,29 +279,35 @@ function createMensaje(resultadoCombate){
 // Combates
 
 function combate(){
+    for (let index = 0; index < ataquesJugador.length; index++) {
+        ataqueEnemigo = ataquesEnemigo[index]
+        ataqueJugador = ataquesJugador[index]
 
-    if (ataqueEnemigo == ataqueJugador){
-        createMensaje('EMPATE')
-    } else if (ataqueJugador == 'AGUA' & ataqueEnemigo == 'FUEGO'){
-        createMensaje('GANASTE')
-        vidasEnemigo--
-        spanVidasEnemigo.innerHTML = vidasEnemigo
-    } else if (ataqueJugador == 'TIERRA' & ataqueEnemigo == 'AGUA'){
-        createMensaje('GANASTE')
-        vidasEnemigo--
-        spanVidasEnemigo.innerHTML = vidasEnemigo
-    } else if (ataqueJugador == 'FUEGO' & ataqueEnemigo == 'TIERRA'){
-        createMensaje('GANASTE')
-        vidasEnemigo--
-        spanVidasEnemigo.innerHTML = vidasEnemigo
-    } else {
-        createMensaje('PERDISTE')
-        vidasJugador--
-        spanVidasJugador.innerHTML = vidasJugador
+        if (ataqueEnemigo == ataqueJugador){
+            createMensaje('EMPATE')
+        } else if (ataqueJugador == 'AGUA' & ataqueEnemigo == 'FUEGO'){
+            createMensaje('GANASTE')
+            vidasEnemigo--
+            spanVidasEnemigo.innerHTML = vidasEnemigo
+        } else if (ataqueJugador == 'TIERRA' & ataqueEnemigo == 'AGUA'){
+            createMensaje('GANASTE')
+            vidasEnemigo--
+            spanVidasEnemigo.innerHTML = vidasEnemigo
+        } else if (ataqueJugador == 'FUEGO' & ataqueEnemigo == 'TIERRA'){
+            createMensaje('GANASTE')
+            vidasEnemigo--
+            spanVidasEnemigo.innerHTML = vidasEnemigo
+        } else {
+            createMensaje('PERDISTE')
+            vidasJugador--
+            spanVidasJugador.innerHTML = vidasJugador
+        }
+        // Revisar las vidas
+        revisarVidas()    
     }
-    
-    // Revisar las vidas
-    revisarVidas()
+
+
+
 }
 
 // Final del juego y validar vidas
