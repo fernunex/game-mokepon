@@ -32,8 +32,8 @@ const spanVidasEnemigo = document.getElementById('vidas-enemigo')
 let ataquesJugador = []
 let ataquesEnemigo = []
 let ataquesDisponibleEnemigo = []
-let vidasJugador = 3
-let vidasEnemigo = 3
+let victoriasJugador = 0
+let victoriasEnemigo = 0
 
 let ataqueEnemigo
 let ataqueJugador
@@ -287,55 +287,58 @@ function combate(){
             createMensaje('EMPATE')
         } else if (ataqueJugador == 'AGUA' & ataqueEnemigo == 'FUEGO'){
             createMensaje('GANASTE')
-            vidasEnemigo--
-            spanVidasEnemigo.innerHTML = vidasEnemigo
+            victoriasEnemigo++
+            spanVidasEnemigo.innerHTML = victoriasEnemigo
         } else if (ataqueJugador == 'TIERRA' & ataqueEnemigo == 'AGUA'){
             createMensaje('GANASTE')
-            vidasEnemigo--
-            spanVidasEnemigo.innerHTML = vidasEnemigo
+            victoriasEnemigo++
+            spanVidasEnemigo.innerHTML = victoriasEnemigo
         } else if (ataqueJugador == 'FUEGO' & ataqueEnemigo == 'TIERRA'){
             createMensaje('GANASTE')
-            vidasEnemigo--
-            spanVidasEnemigo.innerHTML = vidasEnemigo
+            victoriasEnemigo++
+            spanVidasEnemigo.innerHTML = victoriasEnemigo
         } else {
             createMensaje('PERDISTE')
-            vidasJugador--
-            spanVidasJugador.innerHTML = vidasJugador
-        }
-        // Revisar las vidas
-        revisarVidas()    
+            victoriasJugador++
+            spanVidasJugador.innerHTML = victoriasJugador
+        }   
     }
 
-
-
+    // Revisar las vidas
+    revisarVictorias() 
 }
 
 // Final del juego y validar vidas
 
-function revisarVidas(){
+function revisarVictorias(){
 
-    if (vidasJugador == 0){
-        mensajeFinal("EL ENEMIGO ganó :(", spanMascotaEnemigo.innerHTML)
+    if (victoriasJugador == victoriasEnemigo){
+        mensajeFinal("EMPATE")
+
         deshabilitarBotones()
-    } else if (vidasEnemigo == 0) {
-        mensajeFinal("TU Ganaste :D", spanMascotaJugador.innerHTML)
-        deshabilitarBotones()
+    } else if (victoriasJugador < victoriasEnemigo){
+        mensajeFinal("EL ENEMIGO ganó :(")
+
     } else {
-        
+        mensajeFinal("TU Ganaste :D")
+        deshabilitarBotones()
     }
 }
 
 function deshabilitarBotones(){
     // Mostrar boton reiniciar
     sectionReiniciar.style.display = 'flex'
-    botonFuego.disabled = true
-    botonAgua.disabled = true
-    botonTierra.disabled = true
+
+    // Deshabilitar botones
+    botones.forEach((boton) => {
+        boton.disabled = true
+    })
 }
 
-function mensajeFinal(jugadorGanador, mascotaGanadora){
-    sectionMensajes.innerHTML = jugadorGanador + " con la mascota: "+ mascotaGanadora
+function mensajeFinal(mensaje){
+    sectionMensajes.innerHTML = mensaje
 }
+
 
 // Otras funciones
 
