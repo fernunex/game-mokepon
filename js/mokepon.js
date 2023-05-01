@@ -57,6 +57,11 @@ const sectionMensajes = document.getElementById("resultado")
 // Arreglos
 let mokepones = []
 
+//Canvas y mapa
+const sectionVerMapa = document.getElementById('ver-mapa')
+const mapa = document.getElementById('mapa')
+let lienzo = mapa.getContext('2d')
+
 // Classes
 
 class Mokepon {
@@ -130,6 +135,14 @@ mokepones.push(hipodoge, capipepo, ratigueya, tucapalma, langostelvis, pydos)
 
 // Iniciar el juego
 function iniciarJuego (){
+    // Ocultar secciones
+    sectionSeleccionarAtaque.style.display = 'none'
+    sectionReiniciar.style.display = 'none'
+    sectionVerMapa.style.display = 'none'
+
+    // Agregar los addEventListener
+    botonMascota.addEventListener('click', seleccionarMascotaJugador)
+    botonReiniciar.addEventListener('click', reiniciarJuego)
 
     // Iterar mokepones
     mokepones.forEach( (mokepon) =>
@@ -146,18 +159,24 @@ function iniciarJuego (){
     )
     inputsMascotas = document.querySelectorAll('.input-mascota')
     
-    // Ocultar secciones
-    sectionSeleccionarAtaque.style.display = 'none'
-    sectionReiniciar.style.display = 'none'
-    botonMascota.addEventListener('click', seleccionarMascotaJugador)
-    botonReiniciar.addEventListener('click', reiniciarJuego)
 }
 
 // Seleccionar mascotas
 
 function seleccionarMascotaJugador(){
+    // Mostrar/ocultar secciones
     sectionSeleccionarMascota.style.display = 'none'
-    sectionSeleccionarAtaque.style.display = 'flex'
+    // sectionSeleccionarAtaque.style.display = 'flex'
+    sectionVerMapa.style.display = 'flex'
+    let imagenCapipepo = new Image()
+    imagenCapipepo.src = capipepo.imagen
+    lienzo.drawImage(
+        imagenCapipepo,
+        10,
+        10,
+        100,
+        100
+    )
 
     inputsMascotas.forEach((mascota) => {
         if (mascota.control.checked){

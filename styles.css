@@ -91,6 +91,18 @@ input {
     background-color: #fc2600;
 }
 
+/* Canvas y mapa */
+#ver-mapa {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#mapa {
+    border: 2px solid white;
+}
+
+
 #seleccionar-ataque {
     flex-direction: column;
     align-items: center;
