@@ -29,8 +29,11 @@
     <section id="ver-mapa">
         <h1 class="titulo">Recorre el mapa con tu mokepon</h1>
         <canvas id="mapa"></canvas>
-        <button onclick="moverMokeponDerecha(mokepon)">Move Derecha</button>
-        <button onclick="moverMokeponAbajo(mokepon)">Mover Abajo</button>
+        <button onmouseup="detenerMovimiento(mokepon)" onmousedown="moverArriba(mokepon)">Arriba</button>
+        <button onmouseup="detenerMovimiento(mokepon)" onmousedown="moverAbajo(mokepon)">Abajo</button>
+        <button onmouseup="detenerMovimiento(mokepon)" onmousedown="moverDerecha(mokepon)">Derecha</button>
+        <button onmouseup="detenerMovimiento(mokepon)" onmousedown="moverIzquierda(mokepon)">Izquierda</button>
+
 
 
     </section>

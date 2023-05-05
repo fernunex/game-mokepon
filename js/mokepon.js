@@ -61,6 +61,7 @@ let mokepones = []
 const sectionVerMapa = document.getElementById('ver-mapa')
 const mapa = document.getElementById('mapa')
 let lienzo = mapa.getContext('2d')
+let intervalo
 
 let mokepon
 
@@ -78,6 +79,8 @@ class Mokepon {
         this.alto = 80
         this.mapaFoto = new Image()
         this.mapaFoto.src = imagen
+        this.velocidadX = 0
+        this.velocidadY = 0
     }
 }
 
@@ -184,9 +187,12 @@ function seleccionarMascotaJugador(){
         }
     })
     
+    // Extraer la info del personaje seleccionado
     seleccionarMascotaEnemigo()
     extraerAtaques(mascotaJugador)
-    pintarMokepon(mokepon)
+
+    // Pintar los personajes y actualizar cada 50ms
+    intervalo = setInterval(pintarMokepon, 50, mokepon)
 }
 
 function extraerAtaques(mascotaJugador){
@@ -361,6 +367,9 @@ function mensajeFinal(mensaje){
 
 // Canvas y mapa
 function pintarMokepon(mokepon){
+    mokepon.x = mokepon.x + mokepon.velocidadX
+    mokepon.y = mokepon.y + mokepon.velocidadY
+
     lienzo.clearRect(0,0, mapa.width, mapa.height)
     lienzo.drawImage(
         mokepon.mapaFoto,
@@ -371,14 +380,25 @@ function pintarMokepon(mokepon){
     )
 }
 
-function moverMokeponDerecha(mokepon){
-    mokepon.x = mokepon.x + 5
-    pintarMokepon(mokepon)
+function moverArriba(mokepon){
+    mokepon.velocidadY = -3
 }
 
-function moverMokeponAbajo(mokepon){
-    mokepon.y = mokepon.y + 5
-    pintarMokepon(mokepon)
+function moverAbajo(mokepon){
+    mokepon.velocidadY = 3
+}
+
+function moverDerecha(mokepon){
+    mokepon.velocidadX = 3
+}
+
+function moverIzquierda(mokepon){
+    mokepon.velocidadX = -3
+}
+
+function detenerMovimiento(mokepon){
+    mokepon.velocidadX = 0
+    mokepon.velocidadY = 0
 }
 
 // Otras funciones
