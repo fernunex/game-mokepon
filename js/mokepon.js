@@ -62,6 +62,8 @@ const sectionVerMapa = document.getElementById('ver-mapa')
 const mapa = document.getElementById('mapa')
 let lienzo = mapa.getContext('2d')
 
+let mokepon
+
 // Classes
 
 class Mokepon {
@@ -70,6 +72,12 @@ class Mokepon {
         this.imagen = imagen
         this.ataques = []
         this.tipo = tipo
+        this.x = 20
+        this.y = 30
+        this.ancho = 80
+        this.alto = 80
+        this.mapaFoto = new Image()
+        this.mapaFoto.src = imagen
     }
 }
 
@@ -168,15 +176,6 @@ function seleccionarMascotaJugador(){
     sectionSeleccionarMascota.style.display = 'none'
     // sectionSeleccionarAtaque.style.display = 'flex'
     sectionVerMapa.style.display = 'flex'
-    let imagenCapipepo = new Image()
-    imagenCapipepo.src = capipepo.imagen
-    lienzo.drawImage(
-        imagenCapipepo,
-        10,
-        10,
-        100,
-        100
-    )
 
     inputsMascotas.forEach((mascota) => {
         if (mascota.control.checked){
@@ -184,17 +183,18 @@ function seleccionarMascotaJugador(){
             mascotaJugador = mascota.control.id
         }
     })
-
-
+    
     seleccionarMascotaEnemigo()
     extraerAtaques(mascotaJugador)
+    pintarMokepon(mokepon)
 }
 
 function extraerAtaques(mascotaJugador){
     let ataques 
-    mokepones.forEach((mokepon) => {
-        if (mascotaJugador === mokepon.nombre) {
-            ataques = mokepon.ataques
+    mokepones.forEach((mokeponIter) => {
+        if (mascotaJugador === mokeponIter.nombre) {
+            mokepon = mokeponIter
+            ataques = mokeponIter.ataques
         }
     })
 
@@ -359,6 +359,27 @@ function mensajeFinal(mensaje){
     sectionMensajes.innerHTML = mensaje
 }
 
+// Canvas y mapa
+function pintarMokepon(mokepon){
+    lienzo.clearRect(0,0, mapa.width, mapa.height)
+    lienzo.drawImage(
+        mokepon.mapaFoto,
+        mokepon.x,
+        mokepon.y,
+        mokepon.ancho,
+        mokepon.alto
+    )
+}
+
+function moverMokeponDerecha(mokepon){
+    mokepon.x = mokepon.x + 5
+    pintarMokepon(mokepon)
+}
+
+function moverMokeponAbajo(mokepon){
+    mokepon.y = mokepon.y + 5
+    pintarMokepon(mokepon)
+}
 
 // Otras funciones
 function aleatorio(min, max){
