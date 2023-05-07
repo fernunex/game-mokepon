@@ -62,6 +62,7 @@ const sectionVerMapa = document.getElementById('ver-mapa')
 const mapa = document.getElementById('mapa')
 let lienzo = mapa.getContext('2d')
 let intervalo
+let mapaBackground = new Image()
 
 let mokepon
 
@@ -191,8 +192,8 @@ function seleccionarMascotaJugador(){
     seleccionarMascotaEnemigo()
     extraerAtaques(mascotaJugador)
 
-    // Pintar los personajes y actualizar cada 50ms
-    intervalo = setInterval(pintarMokepon, 50, mokepon)
+    // Iniciar el mapa
+    iniciarMapa()
 }
 
 function extraerAtaques(mascotaJugador){
@@ -366,11 +367,24 @@ function mensajeFinal(mensaje){
 }
 
 // Canvas y mapa
-function pintarMokepon(mokepon){
+function pintarCanvas(mokepon){
+    // Movimiento del mokepon del jugador 
     mokepon.x = mokepon.x + mokepon.velocidadX
     mokepon.y = mokepon.y + mokepon.velocidadY
 
+    // Limpiar el canvas
     lienzo.clearRect(0,0, mapa.width, mapa.height)
+
+    // Background
+    lienzo.drawImage(
+        mapaBackground,
+        0,
+        0,
+        mapa.width,
+        mapa.height
+    )
+
+
     lienzo.drawImage(
         mokepon.mapaFoto,
         mokepon.x,
@@ -381,24 +395,84 @@ function pintarMokepon(mokepon){
 }
 
 function moverArriba(mokepon){
-    mokepon.velocidadY = -3
+    mokepon.velocidadY = -5
 }
 
 function moverAbajo(mokepon){
-    mokepon.velocidadY = 3
+    mokepon.velocidadY = 5
 }
 
 function moverDerecha(mokepon){
-    mokepon.velocidadX = 3
+    mokepon.velocidadX = 5
 }
 
 function moverIzquierda(mokepon){
-    mokepon.velocidadX = -3
+    mokepon.velocidadX = -5
 }
 
 function detenerMovimiento(mokepon){
     mokepon.velocidadX = 0
     mokepon.velocidadY = 0
+}
+
+function iniciarMapa(){
+    // Inicializando el mapa
+    mapa.width = 580
+    mapa.height = 410
+    mapaBackground.src = './assets/mokemap.png'
+
+    // Pintar los personajes y actualizar cada 50ms
+    intervalo = setInterval(pintarCanvas, 50, mokepon)
+
+    window.addEventListener('keydown', teclaDown)
+    window.addEventListener('keyup', teclaUp)
+}
+
+
+function teclaDown(event){
+    switch (event.key) {
+        case 'ArrowUp':
+            moverArriba(mokepon)
+            break;
+        
+        case 'ArrowDown':
+            moverAbajo(mokepon)
+            break;
+        
+        case 'ArrowRight':
+            moverDerecha(mokepon)
+            break;
+
+        case 'ArrowLeft':
+            moverIzquierda(mokepon)
+            break;
+
+        default:
+            break;
+    }
+}
+
+function teclaUp(event){
+    switch (event.key) {
+        case 'ArrowUp':
+            detenerMovimiento(mokepon)
+            break;
+        
+        case 'ArrowDown':
+            detenerMovimiento(mokepon)
+            break;
+        
+        case 'ArrowRight':
+            detenerMovimiento(mokepon)
+            break;
+
+        case 'ArrowLeft':
+            detenerMovimiento(mokepon)
+            break;
+
+        default:
+            break;
+    }
 }
 
 // Otras funciones
