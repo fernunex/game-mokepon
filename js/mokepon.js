@@ -67,30 +67,69 @@ let mapaBackground = new Image()
 let mokepon
 
 // Classes
-
 class Mokepon {
-    constructor (nombre, imagen, tipo){
+    constructor (nombre, imagen, tipo, mapaFoto, x = aleatorio(0,540), y = aleatorio(0,330)){
         this.nombre = nombre
         this.imagen = imagen
         this.ataques = []
         this.tipo = tipo
-        this.x = 20
-        this.y = 30
+        this.x = x
+        this.y = y
         this.ancho = 80
         this.alto = 80
         this.mapaFoto = new Image()
-        this.mapaFoto.src = imagen
+        this.mapaFoto.src = mapaFoto
         this.velocidadX = 0
         this.velocidadY = 0
     }
+
+    pintarMokepon(){
+        lienzo.drawImage(
+            this.mapaFoto,
+            this.x,
+            this.y,
+            this.ancho,
+            this.alto
+        )
+    }
 }
 
-let hipodoge = new Mokepon('Hipodoge', 'assets/mokepons_mokepon_hipodoge_attack.png', 'agua')
-let capipepo = new Mokepon('Capipepo', 'assets/mokepons_mokepon_capipepo_attack.png', 'tierra')
-let ratigueya = new Mokepon('Ratigueya', 'assets/mokepons_mokepon_ratigueya_attack.png', 'fuego')
-let langostelvis = new Mokepon('Langostelvis', 'assets/mokepons_mokepon_langostelvis_attack.png', 'fuego')
-let pydos = new Mokepon('Pydos', 'assets/mokepons_mokepon_pydos_attack.png', 'tierra')
-let tucapalma = new Mokepon('Tucapalma', 'assets/mokepons_mokepon_tucapalma_attack.png', 'agua')
+let hipodoge = new Mokepon(
+    'Hipodoge',
+    'assets/mokepons_mokepon_hipodoge_attack.png',
+    'agua',
+    'assets/hipodoge.png',)
+
+let capipepo = new Mokepon(
+    'Capipepo',
+    'assets/mokepons_mokepon_capipepo_attack.png',
+    'tierra',
+    'assets/capipepo.png')
+
+let ratigueya = new Mokepon(
+    'Ratigueya', 
+    'assets/mokepons_mokepon_ratigueya_attack.png',
+    'fuego', 
+    'assets/ratigueya.png')
+
+let langostelvis = new Mokepon(
+    'Langostelvis', 
+    'assets/mokepons_mokepon_langostelvis_attack.png', 
+    'fuego', 
+    'assets/langostelvis.png')
+
+let pydos = new Mokepon(
+    'Pydos', 
+    'assets/mokepons_mokepon_pydos_attack.png', 
+    'tierra',  
+    'assets/pydos.png')
+
+let tucapalma = new Mokepon(
+    'Tucapalma', 
+    'assets/mokepons_mokepon_tucapalma_attack.png', 
+    'agua', 
+    'assets/tucapalma.png')
+
 
 // Llenando los ataques de los mokepones
 
@@ -384,14 +423,14 @@ function pintarCanvas(mokepon){
         mapa.height
     )
 
+    // Pintar mi mokepon
+    mokepon.pintarMokepon()
 
-    lienzo.drawImage(
-        mokepon.mapaFoto,
-        mokepon.x,
-        mokepon.y,
-        mokepon.ancho,
-        mokepon.alto
-    )
+    // Pintar mokepones enemigos
+    langostelvis.pintarMokepon()
+
+
+
 }
 
 function moverArriba(mokepon){
