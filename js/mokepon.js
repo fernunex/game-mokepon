@@ -68,7 +68,7 @@ let mokepon
 
 // Classes
 class Mokepon {
-    constructor (nombre, imagen, tipo, mapaFoto, x = aleatorio(0,540), y = aleatorio(0,330)){
+    constructor (nombre, imagen, tipo, mapaFoto, x = aleatorio(0,530), y = aleatorio(0,330)){
         this.nombre = nombre
         this.imagen = imagen
         this.ataques = []
@@ -429,7 +429,9 @@ function pintarCanvas(mokepon){
     // Pintar mokepones enemigos
     langostelvis.pintarMokepon()
 
-
+    if (mokepon.velocidadX !== 0 || mokepon.velocidadY !== 0) {
+        revisarColision(langostelvis)
+    }
 
 }
 
@@ -511,6 +513,33 @@ function teclaUp(event){
 
         default:
             break;
+    }
+}
+
+// Colisiones
+
+function revisarColision(enemigo){
+    // Posicion del enemigo
+    const arribaEnemigo = enemigo.y 
+    const abajoEnemigo = enemigo.y + enemigo.alto
+    const izquierdaEnemigo = enemigo.x
+    const derechaEnemigo = enemigo.x + enemigo.ancho
+
+    const arribaMascota = mokepon.y +20
+    const abajoMascota = mokepon.y + mokepon.alto -20
+    const izquierdaMascota = mokepon.x +20
+    const derechaMascota = mokepon.x + mokepon.ancho -20
+
+    if (
+        arribaEnemigo < abajoMascota &
+        derechaEnemigo > izquierdaMascota &
+        abajoEnemigo > arribaMascota &
+        izquierdaEnemigo < derechaMascota
+    ) {
+        detenerMovimiento(mokepon)
+        alert('Hay colision con la ' + enemigo.nombre)
+    } else {
+        return
     }
 }
 
