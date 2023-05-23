@@ -130,6 +130,34 @@ let tucapalma = new Mokepon(
     'agua', 
     'assets/tucapalma.png')
 
+// Creando Mokepones Enemigos
+let capipepoEnemigo = new Mokepon(
+    'Capipepo',
+    'assets/mokepons_mokepon_capipepo_attack.png',
+    'tierra',
+    'assets/capipepo.png')
+
+let langostelvisEnemigo = new Mokepon(
+        'Langostelvis', 
+        'assets/mokepons_mokepon_langostelvis_attack.png', 
+        'fuego', 
+        'assets/langostelvis.png')
+
+capipepoEnemigo.ataques.push(
+    {nombre: '🌰', id: 'boton-tierra'},
+    {nombre: '🌰', id: 'boton-tierra'},
+    {nombre: '🌰', id: 'boton-tierra'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🔥', id: 'boton-fuego'}
+)
+
+langostelvisEnemigo.ataques.push(
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🌰', id: 'boton-tierra'}
+)
 
 // Llenando los ataques de los mokepones
 
@@ -228,7 +256,6 @@ function seleccionarMascotaJugador(){
     })
     
     // Extraer la info del personaje seleccionado
-    seleccionarMascotaEnemigo()
     extraerAtaques(mascotaJugador)
 
     // Iniciar el mapa
@@ -247,11 +274,13 @@ function extraerAtaques(mascotaJugador){
     mostrarAtaques(ataques)
 }
 
-function seleccionarMascotaEnemigo(){
-    let mascotaAleatorio = aleatorio(0, mokepones.length - 1)
+function seleccionarMascotaEnemigo(enemigo){
+    // let mascotaAleatorio = aleatorio(0, mokepones.length - 1)
 
-    spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatorio].nombre
-    ataquesDisponibleEnemigo = mokepones[mascotaAleatorio].ataques
+    spanMascotaEnemigo.innerHTML = enemigo.nombre
+    ataquesDisponibleEnemigo = enemigo.ataques
+    seleccionarAtaqueEnemigo()
+
 }
 
 function mostrarAtaques(ataques){
@@ -271,7 +300,6 @@ function mostrarAtaques(ataques){
     botones = document.querySelectorAll('.b-ataque')
 
     secuenciaAtaques()
-    seleccionarAtaqueEnemigo()
 }
 
 // Agregare los addEventListener a los botones
@@ -427,10 +455,12 @@ function pintarCanvas(mokepon){
     mokepon.pintarMokepon()
 
     // Pintar mokepones enemigos
-    langostelvis.pintarMokepon()
+    langostelvisEnemigo.pintarMokepon()
+    capipepoEnemigo.pintarMokepon()
 
     if (mokepon.velocidadX !== 0 || mokepon.velocidadY !== 0) {
-        revisarColision(langostelvis)
+        revisarColision(langostelvisEnemigo)
+        revisarColision(capipepoEnemigo)
     }
 
 }
@@ -536,8 +566,17 @@ function revisarColision(enemigo){
         abajoEnemigo > arribaMascota &
         izquierdaEnemigo < derechaMascota
     ) {
+        // Removiendo el set interval para no colisionar mas de 1 vez
+        clearInterval(intervalo)
+        
+        // Seleccionando la mascota y extrayendo los ataques
         detenerMovimiento(mokepon)
-        alert('Hay colision con la ' + enemigo.nombre)
+        sectionVerMapa.style.display = 'none'
+        seleccionarMascotaEnemigo(enemigo)
+
+        // Mostrando la seccion de seleccionar ataques
+        sectionSeleccionarAtaque.style.display = 'flex'
+
     } else {
         return
     }
