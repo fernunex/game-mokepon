@@ -66,17 +66,34 @@ let mapaBackground = new Image()
 
 let mokepon
 
+// Mapa Responsive
+let anchoMapa = window.innerWidth - 20
+let alturaResponsive
+const anchoMaximoMapa = 350
+
+if (anchoMapa > anchoMaximoMapa) {
+    anchoMapa = anchoMaximoMapa - 20
+}
+
+alturaResponsive = anchoMapa * 600 / 800
+
+mapa.width = anchoMapa
+mapa.height = alturaResponsive
+
+
+
+
 // Classes
 class Mokepon {
-    constructor (nombre, imagen, tipo, mapaFoto, x = aleatorio(0,530), y = aleatorio(0,330)){
+    constructor (nombre, imagen, tipo, mapaFoto){
         this.nombre = nombre
         this.imagen = imagen
         this.ataques = []
         this.tipo = tipo
-        this.x = x
-        this.y = y
-        this.ancho = 80
-        this.alto = 80
+        this.ancho = 40
+        this.alto = 40
+        this.x = aleatorio(0, mapa.width - this.ancho)
+        this.y = aleatorio(0, mapa.height - this.alto)
         this.mapaFoto = new Image()
         this.mapaFoto.src = mapaFoto
         this.velocidadX = 0
@@ -488,8 +505,8 @@ function detenerMovimiento(mokepon){
 
 function iniciarMapa(){
     // Inicializando el mapa
-    mapa.width = 580
-    mapa.height = 410
+    // mapa.width = 580
+    // mapa.height = 410
     mapaBackground.src = './assets/mokemap.png'
 
     // Pintar los personajes y actualizar cada 50ms
