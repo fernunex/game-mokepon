@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/fernunex/game-mokepon/issues"
   },
-  "homepage": "https://github.com/fernunex/game-mokepon#readme"
+  "homepage": "https://github.com/fernunex/game-mokepon#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
