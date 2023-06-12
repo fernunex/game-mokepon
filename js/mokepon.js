@@ -255,6 +255,17 @@ function iniciarJuego (){
     )
     inputsMascotas = document.querySelectorAll('.input-mascota')
     
+    unirseAlJuego()
+}
+
+function unirseAlJuego(){
+    fetch('http://localhost:8070/unirse').then(function (res) {
+        if (res.ok){
+            res.text().then(function (respuesta){
+                console.log(respuesta)
+            })
+        }
+    })
 }
 
 // Seleccionar mascotas
