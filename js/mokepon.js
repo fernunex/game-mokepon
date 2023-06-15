@@ -80,6 +80,10 @@ alturaResponsive = anchoMapa * 600 / 800
 mapa.width = anchoMapa
 mapa.height = alturaResponsive
 
+// Backend
+let jugadorId = null
+const urlLocalHost = "http://localhost:8070"
+
 
 
 
@@ -255,14 +259,15 @@ function iniciarJuego (){
     )
     inputsMascotas = document.querySelectorAll('.input-mascota')
     
-    unirseAlJuego()
+    unirseAlJuegoBackend()
 }
 
-function unirseAlJuego(){
-    fetch('http://localhost:8070/unirse').then(function (res) {
+function unirseAlJuegoBackend(){
+    fetch(urlLocalHost + '/unirse').then(function (res) {
         if (res.ok){
             res.text().then(function (respuesta){
                 console.log(respuesta)
+                jugadorId = respuesta
             })
         }
     })
@@ -283,11 +288,27 @@ function seleccionarMascotaJugador(){
         }
     })
     
+    // Enviamos info sobre la mascota seleccionada al backend
+    seleccionarMokeponBackend(mascotaJugador)
+
     // Extraer la info del personaje seleccionado
     extraerAtaques(mascotaJugador)
 
     // Iniciar el mapa
     iniciarMapa()
+}
+
+function seleccionarMokeponBackend(mascotaJugador){
+    fetch(`${urlLocalHost}/mokepon/${jugadorId}`,
+        {
+            method: "post",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({
+                mokepon: mascotaJugador
+            })
+        })
 }
 
 function extraerAtaques(mascotaJugador){
