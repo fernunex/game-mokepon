@@ -15,10 +15,17 @@ const jugadores = []
 class Jugador {
     constructor(id){
         this.id = id
+        this.x = 0
+        this.y = 0
     }
 
     asignarMokepon(mokepon){
         this.mokepon = mokepon
+    }
+
+    actualizarCoordenadas(x, y){
+        this.x = x
+        this.y = y
     }
 }
 
@@ -28,6 +35,8 @@ class Mokepon {
     }
 }
 
+
+// Unirse al juego y obtener un Id unico por jugador
 app.get("/unirse", (req, res) => { 
     const id = `${Math.random()}`
     
@@ -40,6 +49,8 @@ app.get("/unirse", (req, res) => {
     res.send(id)
 })
 
+
+// Recibir el mokepon seleccionado
 app.post("/mokepon/:judadorId", (req, res) => {
 
     const jugadorId = req.params.judadorId || ""
@@ -57,6 +68,21 @@ app.post("/mokepon/:judadorId", (req, res) => {
     res.end() // Terminamos la respuesta para que el navegador no espere una respuesta
 })
 
+
+// Recibir las coordenadas del jugador
+app.post('/mokepon/:jugadorId/posicion', (req, res) => {
+    const jugadorId = req.params.jugadorId || ''
+    const x = req.body.x || 0
+    const y = req.body.y || 0
+
+    const jugadorIndex = jugadores.findIndex((jugador) => jugadorId == jugador.id)
+
+    if (jugadorIndex >= 0){
+        jugadores[jugadorIndex].actualizarCoordenadas(x,y)
+    }
+
+    res.end()
+})
 
 // listen at port 8070
 app.listen(8070, () => {

@@ -503,6 +503,9 @@ function pintarCanvas(mokepon){
     // Pintar mi mokepon
     mokepon.pintarMokepon()
 
+    // Enviar la posicion al backend/server
+    enviarPosicionBackend(mokepon.x,  mokepon.y)
+
     // Pintar mokepones enemigos
     langostelvisEnemigo.pintarMokepon()
     capipepoEnemigo.pintarMokepon()
@@ -513,6 +516,22 @@ function pintarCanvas(mokepon){
     }
 
 }
+
+// Funcion para enviar la posicion al backend
+function enviarPosicionBackend(x, y){
+    fetch(`${urlLocalHost}/mokepon/${jugadorId}/posicion`,
+    {
+        method: "post",
+        headers: {
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify({ // usando sintaxis de clave-valor igual
+            x,
+            y
+        })
+    })
+}
+
 
 function moverArriba(mokepon){
     mokepon.velocidadY = -5
