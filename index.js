@@ -81,7 +81,11 @@ app.post('/mokepon/:jugadorId/posicion', (req, res) => {
         jugadores[jugadorIndex].actualizarCoordenadas(x,y)
     }
 
-    res.end()
+    const enemigos = jugadores.filter((jugador) => jugador.id !== jugadorId)
+
+    res.send({
+        enemigos
+    })
 })
 
 // listen at port 8070
