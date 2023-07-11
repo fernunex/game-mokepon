@@ -83,6 +83,7 @@ mapa.height = alturaResponsive
 // Backend
 let jugadorId = null
 const urlLocalHost = "http://localhost:8070"
+let mokeponesEnemigos = []
 
 // Just when we send our position using a if to check if change position
 // let latestX = 0
@@ -511,7 +512,11 @@ function pintarCanvas(mokepon){
     //     latestY = mokepon.y
     // }
     enviarPosicionBackend(mokepon.x,  mokepon.y)
-
+    
+    // Pintar mokepones enemigos Online
+    mokeponesEnemigos.forEach((enemigo) => {
+        enemigo.pintarMokepon()
+    })
 
 
     if (mokepon.velocidadX !== 0 || mokepon.velocidadY !== 0) {
@@ -540,7 +545,7 @@ function enviarPosicionBackend(x, y){
                 .then(function (respuesta) {
                     console.log(respuesta.enemigos)
                     let enemigos = respuesta.enemigos
-                    enemigos.forEach(enemigo => {
+                    mokeponesEnemigos = enemigos.map(enemigo => {
                         let nombreMokepon = enemigo.mokepon.nombre || ''
                         let mokeponEnemigo = null
                         if (nombreMokepon == 'Capipepo') {
@@ -553,7 +558,8 @@ function enviarPosicionBackend(x, y){
 
                         mokeponEnemigo.x = enemigo.x
                         mokeponEnemigo.y = enemigo.y
-                        mokeponEnemigo.pintarMokepon()
+                        
+                        return mokeponEnemigo
                         
                     });
                 })
