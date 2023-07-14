@@ -17,6 +17,7 @@ class Jugador {
         this.id = id
         this.x = 0
         this.y = 0
+        this.mokepon = null
     }
 
     asignarMokepon(mokepon){
@@ -26,6 +27,10 @@ class Jugador {
     actualizarCoordenadas(x, y){
         this.x = x
         this.y = y
+    }
+
+    asignarAtaques(ataques){
+        this.ataques = ataques
     }
 }
 
@@ -63,8 +68,7 @@ app.post("/mokepon/:judadorId", (req, res) => {
         jugadores[jugadorIndex].asignarMokepon(mokepon)
     }    
 
-    console.log(jugadores)
-    console.log(jugadorId) // Estas dos lineas se ejecutan en nuestro backend
+    // console.log(jugadorId) // Estas dos lineas se ejecutan en nuestro backend
     res.end() // Terminamos la respuesta para que el navegador no espere una respuesta
 })
 
@@ -81,11 +85,29 @@ app.post('/mokepon/:jugadorId/posicion', (req, res) => {
         jugadores[jugadorIndex].actualizarCoordenadas(x,y)
     }
 
-    const enemigos = jugadores.filter((jugador) => jugador.id !== jugadorId)
+    // Enviar a los enemigos que solo ya hayan elegido su mokepon
+    const enemigos = jugadores.filter((jugador) => (jugador.id !== jugadorId && jugador.mokepon !== null))
 
     res.send({
         enemigos
     })
+})
+
+// Recibiendo los ataques
+app.post("/mokepon/:judadorId/ataques", (req, res) => {
+
+    const jugadorId = req.params.judadorId || ""
+    const ataques = req.body.ataques || []
+
+    const jugadorIndex = jugadores.findIndex((jugador) => jugadorId == jugador.id)
+    
+    if (jugadorIndex >= 0){
+        jugadores[jugadorIndex].asignarAtaques(ataques)
+    }    
+
+    console.log(jugadores[jugadorIndex])
+
+    res.end()
 })
 
 // listen at port 8070

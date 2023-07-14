@@ -82,6 +82,7 @@ mapa.height = alturaResponsive
 
 // Backend
 let jugadorId = null
+let enemigoId = null
 const urlLocalHost = "http://localhost:8070"
 let mokeponesEnemigos = []
 
@@ -125,7 +126,7 @@ let hipodoge = new Mokepon(
     'Hipodoge',
     'assets/mokepons_mokepon_hipodoge_attack.png',
     'agua',
-    'assets/hipodoge.png',)
+    'assets/hipodoge.png')
 
 let capipepo = new Mokepon(
     'Capipepo',
@@ -371,11 +372,26 @@ function secuenciaAtaques(){
                 boton.style.background = '#112f58'
                 boton.disabled = true
             }
+            if (ataquesJugador.length == 5) {
+                enviarAtaquesBackend()
+            }
+            
             iniciarPelea()
         })
     })
 }
 
+function enviarAtaquesBackend(){
+    fetch(`${urlLocalHost}/mokepon/${jugadorId}/ataques`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            ataques: ataquesJugador
+        })
+    })
+}
 
 function seleccionarAtaqueEnemigo(){
     // Extracting the names
@@ -516,14 +532,8 @@ function pintarCanvas(mokepon){
     // Pintar mokepones enemigos Online
     mokeponesEnemigos.forEach((enemigo) => {
         enemigo.pintarMokepon()
+        revisarColision(enemigo)
     })
-
-
-    if (mokepon.velocidadX !== 0 || mokepon.velocidadY !== 0) {
-        revisarColision(langostelvisEnemigo)
-        revisarColision(capipepoEnemigo)
-    }
-
 }
 
 // Funcion para enviar la posicion al backend
@@ -549,11 +559,26 @@ function enviarPosicionBackend(x, y){
                         let nombreMokepon = enemigo.mokepon.nombre || ''
                         let mokeponEnemigo = null
                         if (nombreMokepon == 'Capipepo') {
-                            mokeponEnemigo = capipepo
+                            mokeponEnemigo = new Mokepon(
+                                'Capipepo',
+                                'assets/mokepons_mokepon_capipepo_attack.png',
+                                'tierra',
+                                'assets/capipepo.png',
+                                enemigo.id)
                         } else if (nombreMokepon == 'Hipodoge'){
-                            mokeponEnemigo = hipodoge
+                            mokeponEnemigo = new Mokepon(
+                                'Hipodoge',
+                                'assets/mokepons_mokepon_hipodoge_attack.png',
+                                'agua',
+                                'assets/hipodoge.png',
+                                enemigo.id)
                         } else if (nombreMokepon == 'Ratigueya'){
-                            mokeponEnemigo = ratigueya
+                            mokeponEnemigo = new Mokepon(
+                                'Ratigueya', 
+                                'assets/mokepons_mokepon_ratigueya_attack.png',
+                                'fuego', 
+                                'assets/ratigueya.png',
+                                enemigo.id)
                         }
 
                         mokeponEnemigo.x = enemigo.x
@@ -673,6 +698,7 @@ function revisarColision(enemigo){
         clearInterval(intervalo)
         
         // Seleccionando la mascota y extrayendo los ataques
+        enemigoId = enemigo.id
         detenerMovimiento(mokepon)
         sectionVerMapa.style.display = 'none'
         seleccionarMascotaEnemigo(enemigo)
