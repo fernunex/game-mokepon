@@ -331,7 +331,6 @@ function seleccionarMascotaEnemigo(enemigo){
 
     spanMascotaEnemigo.innerHTML = enemigo.nombre
     ataquesDisponibleEnemigo = enemigo.ataques
-    seleccionarAtaqueEnemigo()
 
 }
 
@@ -376,7 +375,6 @@ function secuenciaAtaques(){
                 enviarAtaquesBackend()
             }
             
-            iniciarPelea()
         })
     })
 }
@@ -391,8 +389,27 @@ function enviarAtaquesBackend(){
             ataques: ataquesJugador
         })
     })
+
+    intervalo = setInterval(obtenerAtaquesBackend, 50)
 }
 
+function obtenerAtaquesBackend(){
+    fetch(`${urlLocalHost}/mokepon/${enemigoId}/ataques`)
+    .then(function (res) {
+        if (res.ok){
+            res.json()
+            .then(function ({ ataques }){
+                if (ataques.length == 5){
+                    ataquesEnemigo = ataques
+                    combate()
+                }
+            })
+        }
+    }
+    )
+}
+
+// Deprecated Function
 function seleccionarAtaqueEnemigo(){
     // Extracting the names
     ataquesDisponibleEnemigo.forEach((ataque) => {
@@ -449,6 +466,8 @@ function createMensaje(resultadoCombate){
 // Combates
 
 function combate(){
+    clearInterval(intervalo)
+
     for (let index = 0; index < ataquesJugador.length; index++) {
         ataqueEnemigo = ataquesEnemigo[index]
         ataqueJugador = ataquesJugador[index]

@@ -110,6 +110,15 @@ app.post("/mokepon/:judadorId/ataques", (req, res) => {
     res.end()
 })
 
+// Mandando los ataques de un jugador
+app.get("/mokepon/:jugadorId/ataques", (req, res) => {
+    const jugadorId = req.params.jugadorId || ""
+    const jugador = jugadores.find((jugador) => jugadorId == jugador.id)
+    res.send({
+        ataques: jugador.ataques || []
+    })
+})
+
 // listen at port 8070
 app.listen(8070, () => {
     console.log('El server esta funcionando')
