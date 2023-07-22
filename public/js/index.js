@@ -83,7 +83,8 @@ mapa.height = alturaResponsive
 // Backend
 let jugadorId = null
 let enemigoId = null
-const urlLocalHost = "http://localhost:8070"
+const urlLocalHost = "http://192.168.0.56:8070" // Cambiar a la url de tu servidor
+// configuracion para correlo en localhost "http://localhost:8070"
 let mokeponesEnemigos = []
 
 // Just when we send our position using a if to check if change position
@@ -279,26 +280,27 @@ function unirseAlJuegoBackend(){
 // Seleccionar mascotas
 
 function seleccionarMascotaJugador(){
-    // Mostrar/ocultar secciones
-    sectionSeleccionarMascota.style.display = 'none'
-    // sectionSeleccionarAtaque.style.display = 'flex'
-    sectionVerMapa.style.display = 'flex'
 
     inputsMascotas.forEach((mascota) => {
         if (mascota.control.checked){
             spanMascotaJugador.innerHTML = mascota.control.id
             mascotaJugador = mascota.control.id
+
+            // Mostrar/ocultar secciones
+            sectionSeleccionarMascota.style.display = 'none'
+            // sectionSeleccionarAtaque.style.display = 'flex'
+            sectionVerMapa.style.display = 'flex'
+
+            // Enviamos info sobre la mascota seleccionada al backend
+            seleccionarMokeponBackend(mascotaJugador)
+
+            // Extraer la info del personaje seleccionado
+            extraerAtaques(mascotaJugador)
+
+            // Iniciar el mapa
+            iniciarMapa()
         }
     })
-    
-    // Enviamos info sobre la mascota seleccionada al backend
-    seleccionarMokeponBackend(mascotaJugador)
-
-    // Extraer la info del personaje seleccionado
-    extraerAtaques(mascotaJugador)
-
-    // Iniciar el mapa
-    iniciarMapa()
 }
 
 function seleccionarMokeponBackend(mascotaJugador){

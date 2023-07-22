@@ -31,11 +31,11 @@
     <section id="ver-mapa">
         <h2 class="subtitulo">Recorre el mapa con tu mokepon</h2>
         <canvas id="mapa"></canvas>
-        <button onmouseup="detenerMovimiento(mokepon)" onmousedown="moverArriba(mokepon)">Arriba</button>
+        <button onmouseup="detenerMovimiento(mokepon)" ontouchend="detenerMovimiento(mokepon)" onmousedown="moverArriba(mokepon)" ontouchstart="moverArriba(mokepon)">Arriba</button>
         <div class="buttons">
-            <button onmouseup="detenerMovimiento(mokepon)" onmousedown="moverIzquierda(mokepon)">Izquierda</button>
-            <button onmouseup="detenerMovimiento(mokepon)" onmousedown="moverAbajo(mokepon)">Abajo</button>
-            <button onmouseup="detenerMovimiento(mokepon)" onmousedown="moverDerecha(mokepon)">Derecha</button>
+            <button onmouseup="detenerMovimiento(mokepon)" ontouchend="detenerMovimiento(mokepon)" onmousedown="moverIzquierda(mokepon)" ontouchstart="moverIzquierda(mokepon)">Izquierda</button>
+            <button onmouseup="detenerMovimiento(mokepon)" ontouchend="detenerMovimiento(mokepon)" onmousedown="moverAbajo(mokepon)" ontouchstart="moverAbajo(mokepon)">Abajo</button>
+            <button onmouseup="detenerMovimiento(mokepon)" ontouchend="detenerMovimiento(mokepon)" onmousedown="moverDerecha(mokepon)" ontouchstart="moverDerecha(mokepon)">Derecha</button>
         </div>
 
 
@@ -75,6 +75,6 @@
         </div>
     
     </section>
-    <script src="./js/mokepon.js"></script>
+    <script src="./js/index.js"></script>
 </body>
 </html>

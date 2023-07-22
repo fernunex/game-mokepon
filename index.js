@@ -3,6 +3,9 @@ const cors = require("cors")
 
 const app = express()
 
+// Para poder enviar static files
+app.use(express.static('public'))
+
 // Usar la libreria de cors en nuestra app
 app.use(cors())
 
@@ -50,7 +53,7 @@ app.get("/unirse", (req, res) => {
     jugadores.push(jugador)
 
     res.setHeader('Access-Control-Allow-Origin', '*') // Cualquier origen es valido
-
+    // console.log("genero id")
     res.send(id)
 })
 
@@ -67,7 +70,7 @@ app.post("/mokepon/:judadorId", (req, res) => {
     if (jugadorIndex >= 0){
         jugadores[jugadorIndex].asignarMokepon(mokepon)
     }    
-
+    // console.log("Recibimos el mokepon")
     // console.log(jugadorId) // Estas dos lineas se ejecutan en nuestro backend
     res.end() // Terminamos la respuesta para que el navegador no espere una respuesta
 })
@@ -87,7 +90,6 @@ app.post('/mokepon/:jugadorId/posicion', (req, res) => {
 
     // Enviar a los enemigos que solo ya hayan elegido su mokepon
     const enemigos = jugadores.filter((jugador) => (jugador.id !== jugadorId && jugador.mokepon !== null))
-
     res.send({
         enemigos
     })
@@ -104,8 +106,10 @@ app.post("/mokepon/:judadorId/ataques", (req, res) => {
     if (jugadorIndex >= 0){
         jugadores[jugadorIndex].asignarAtaques(ataques)
     }    
+    
+    // console.log("Recibimos los ataques")
 
-    console.log(jugadores[jugadorIndex])
+    // console.log(jugadores[jugadorIndex])
 
     res.end()
 })
