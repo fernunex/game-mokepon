@@ -740,7 +740,25 @@ function aleatorio(min, max){
 // Reiniciar Juego
 
 function reiniciarJuego(){
-    location.reload()
+    // Eliminar Jugador del backend y recargar la pagina
+    deleteJugadorBackend(jugadorId)
+}
+
+function deleteJugadorBackend(jugadorId){
+    fetch(`${urlLocalHost}/mokepon/${jugadorId}/delete`,
+        {
+            method: "post",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({
+                jugadorId: jugadorId
+            })
+        }).then(function (res) {
+            if (res.ok){
+                location.reload()
+            }
+        })
 }
 
 // Main

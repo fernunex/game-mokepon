@@ -123,6 +123,18 @@ app.get("/mokepon/:jugadorId/ataques", (req, res) => {
     })
 })
 
+// Eliminando al jugador de la lista de jugadores
+app.post("/mokepon/:jugadorId/delete", (req, res) =>{
+    const jugadorId = req.params.jugadorId || ""
+    const jugadorIndex = jugadores.findIndex((jugador) => jugadorId == jugador.id)
+    
+    if (jugadorIndex >= 0){
+            jugadores.splice(jugadorIndex, 1);
+        }
+        
+    res.end()
+})
+
 // listen at port 8070
 app.listen(8070, () => {
     console.log('El server esta funcionando')
