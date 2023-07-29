@@ -600,6 +600,27 @@ function enviarPosicionBackend(x, y){
                                 'fuego', 
                                 'assets/ratigueya.png',
                                 enemigo.id)
+                        } else if (nombreMokepon == 'Langostelvis'){
+                            mokeponEnemigo = new Mokepon(
+                                'Langostelvis', 
+                                'assets/mokepons_mokepon_langostelvis_attack.png', 
+                                'fuego', 
+                                'assets/langostelvis.png',
+                                enemigo.id)
+                        } else if (nombreMokepon == 'Pydos'){
+                            mokeponEnemigo = new Mokepon(
+                                'Pydos', 
+                                'assets/mokepons_mokepon_pydos_attack.png', 
+                                'tierra',  
+                                'assets/pydos.png',
+                                enemigo.id)
+                        } else if (nombreMokepon == 'Tucapalma'){
+                            mokeponEnemigo = new Mokepon(
+                                'Tucapalma', 
+                                'assets/mokepons_mokepon_tucapalma_attack.png', 
+                                'agua', 
+                                'assets/tucapalma.png',
+                                enemigo.id)
                         }
 
                         mokeponEnemigo.x = enemigo.x
