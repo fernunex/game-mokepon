@@ -83,7 +83,7 @@ mapa.height = alturaResponsive
 // Backend
 let jugadorId = null
 let enemigoId = null
-const urlLocalHost = "http://192.168.0.56:8070" // Cambiar a la url de tu servidor
+const urlLocalHost = "http://localhost:8070" // Cambiar a la url de tu servidor
 // configuracion para correlo en localhost "http://localhost:8070"
 let mokeponesEnemigos = []
 
