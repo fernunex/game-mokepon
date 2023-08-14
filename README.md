@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=650px height=450px src="https://github.com/fernunex/game-mokepon/assets/49699693/d0d8deab-8536-4d84-862e-415e27dcd7e7" alt="Project logo"></a>
+ <img width=650px height=450px src="https://github.com/fernunex/game-mokepon/assets/49699693/2baec3d1-9459-42ba-98f4-64f19809ccc8" alt="Project logo"></a>
 </p>
 <h3 align="center">Basic Web Online Multiplayer Game</h3>
 
